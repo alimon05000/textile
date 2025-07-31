@@ -1,11 +1,9 @@
-/* Сброс стилей */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Основные стили */
 body {
     font-family: 'El Messiri', serif;
     background: #000;
@@ -13,12 +11,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: #d4af37; /* Золотой */
+    color: #d4af37;
     position: relative;
     overflow: hidden;
 }
 
-/* Фоновое золотое свечение */
 .gold-light {
     position: absolute;
     width: 300%;
@@ -37,7 +34,6 @@ body {
     100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
 }
 
-/* Контейнер */
 .container {
     width: 90%;
     max-width: 600px;
@@ -45,9 +41,13 @@ body {
     z-index: 2;
 }
 
-/* Свиток */
 .scroll {
-    background: url('https://i.imgur.com/J5q7X2n.png') center/cover; /* Текстура пергамента */
+    background: linear-gradient(
+        to right,
+        rgba(20, 20, 20, 0.9) 0%,
+        rgba(40, 40, 40, 0.8) 50%,
+        rgba(20, 20, 20, 0.9) 100%
+    ), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23d4af37" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
     border: 2px solid rgba(212, 175, 55, 0.3);
     border-radius: 0 10px 10px 0;
     padding: 40px;
@@ -59,28 +59,11 @@ body {
     animation: float 8s ease-in-out infinite;
 }
 
-.scroll::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(212, 175, 55, 0.1) 0%,
-        rgba(0, 0, 0, 0.7) 100%
-    );
-    z-index: -1;
-    border-radius: inherit;
-}
-
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(-1deg); }
     50% { transform: translateY(-15px) rotate(1deg); }
 }
 
-/* Текст */
 .quote-box {
     text-align: center;
 }
@@ -109,7 +92,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Адаптив */
 @media (max-width: 600px) {
     .scroll {
         padding: 30px 20px;
