@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wisdom-v1';
+const CACHE_NAME = 'wisdom-v2';
 const ASSETS = [
     '/',
     '/index.html',
