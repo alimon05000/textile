@@ -1,107 +1,121 @@
+/* Сброс стилей */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Основные стили */
 body {
-    font-family: 'Amiri', serif;
-    background: linear-gradient(135deg, #0a1a3b, #0a5c36);
+    font-family: 'El Messiri', serif;
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    color: #d4af37; /* Золотой */
     position: relative;
-    color: white;
+    overflow: hidden;
 }
 
-.background-light {
+/* Фоновое золотое свечение */
+.gold-light {
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(10, 180, 180, 0.1) 0%, transparent 70%);
-    animation: moveLight 20s infinite alternate;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(
+        circle,
+        rgba(212, 175, 55, 0.05) 0%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    animation: pulse 15s infinite alternate;
+    z-index: 0;
 }
 
-@keyframes moveLight {
-    0% { transform: translate(-25%, -25%); }
-    100% { transform: translate(25%, 25%); }
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
 }
 
+/* Контейнер */
 .container {
     width: 90%;
     max-width: 600px;
-    perspective: 1000px;
-}
-
-.water-drop {
-    position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 
-        0 0 30px rgba(0, 255, 255, 0.2),
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
-    transform-style: preserve-3d;
-    animation: float 8s ease-in-out infinite;
-    overflow: hidden;
-}
-
-.water-drop::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    transform: rotate(30deg);
-    animation: shine 5s infinite;
-}
-
-@keyframes shine {
-    0% { transform: translateX(-100%) rotate(30deg); }
-    100% { transform: translateX(100%) rotate(30deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotateX(5deg); }
-    50% { transform: translateY(-20px) rotateX(-5deg); }
-}
-
-.quote-box {
     position: relative;
     z-index: 2;
 }
 
+/* Свиток */
+.scroll {
+    background: url('https://i.imgur.com/J5q7X2n.png') center/cover; /* Текстура пергамента */
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 0 10px 10px 0;
+    padding: 40px;
+    box-shadow:
+        0 0 30px rgba(212, 175, 55, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transform-style: preserve-3d;
+    animation: float 8s ease-in-out infinite;
+}
+
+.scroll::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.1) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: -1;
+    border-radius: inherit;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+}
+
+/* Текст */
+.quote-box {
+    text-align: center;
+}
+
 #quote-text {
-    font-size: 24px;
+    font-size: 26px;
     line-height: 1.6;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+    position: relative;
+}
+
+#quote-text::after {
+    content: '❝';
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-size: 50px;
+    opacity: 0.3;
 }
 
 #quote-source {
     font-size: 18px;
     font-style: italic;
     opacity: 0.8;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    letter-spacing: 1px;
 }
 
-/* Адаптивность */
-@media (max-width: 500px) {
-    .water-drop {
-        padding: 25px;
+/* Адаптив */
+@media (max-width: 600px) {
+    .scroll {
+        padding: 30px 20px;
     }
     #quote-text {
-        font-size: 20px;
+        font-size: 22px;
     }
     #quote-source {
         font-size: 16px;
