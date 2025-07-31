@@ -6,43 +6,100 @@
 
 body {
     font-family: 'Amiri', serif;
-    background: #f5f5f5;
+    background: linear-gradient(135deg, #0a1a3b, #0a5c36);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px;
-    background: linear-gradient(135deg, #0a5c36, #128c7e);
+    overflow: hidden;
+    position: relative;
     color: white;
-    text-align: center;
+}
+
+.background-light {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(10, 180, 180, 0.1) 0%, transparent 70%);
+    animation: moveLight 20s infinite alternate;
+}
+
+@keyframes moveLight {
+    0% { transform: translate(-25%, -25%); }
+    100% { transform: translate(25%, 25%); }
 }
 
 .container {
+    width: 90%;
     max-width: 600px;
-    width: 100%;
+    perspective: 1000px;
+}
+
+.water-drop {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+    animation: float 8s ease-in-out infinite;
+    overflow: hidden;
+}
+
+.water-drop::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    animation: shine 5s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) rotate(30deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(5deg); }
+    50% { transform: translateY(-20px) rotateX(-5deg); }
 }
 
 .quote-box {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
 #quote-text {
     font-size: 24px;
     line-height: 1.6;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 #quote-source {
     font-size: 18px;
     font-style: italic;
     opacity: 0.8;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
+/* Адаптивность */
 @media (max-width: 500px) {
+    .water-drop {
+        padding: 25px;
+    }
     #quote-text {
         font-size: 20px;
     }
